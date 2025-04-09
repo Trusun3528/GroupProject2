@@ -1,7 +1,6 @@
 package com.group2.Arcazon.service;
 
-import java.math.BigDecimal;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,36 +11,24 @@ import com.group2.Arcazon.repository.ProductRepository;
 @Service
 public class ProductService {
      @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
     
-    public Product addNewProduct(Product product) {
-        
-        if (product.getName() == null || product.getName().trim().isEmpty()) {
-            throw new IllegalArgumentException("Product name cannot be empty");
-        }
-        
-        if (product.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Product price must be greater than zero");
-        }
-        
-        
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+    }
+    public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
-    
-    public Product updateStock(Long productId, int quantity) {
-        Optional<Product> productOpt = productRepository.findById(productId);
-        if (productOpt.isPresent()) {
-            Product product = productOpt.get();
-            
-            if (product.getStock() + quantity < 0) {
-                throw new IllegalArgumentException("Cannot reduce stock below zero");
-            }
-            
-            product.setStock(product.getStock() + quantity);
-            return productRepository.save(product);
-        } else {
-            throw new RuntimeException("Product not found with id: " + productId);
-        }
+    public List<Product> findByPriceBetween(java.math.BigDecimal minPrice, java.math.BigDecimal maxPrice) {
+        return productRepository.findByPriceBetween(minPrice, maxPrice);
     }
-    
+    public List<Product> findByCategory_Id(Long categoryId) {
+        return productRepository.findByCategory_Id(categoryId);
+    }
 }
