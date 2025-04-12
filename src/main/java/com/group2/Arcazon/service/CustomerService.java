@@ -34,16 +34,13 @@ public class CustomerService {
         return customerRepository.existsByEmail(email);
     }
 
-    public List<Customer> findByFirstNameOrLastNameIgnoreCase(String keyword) {
-        return customerRepository.findByFirstNameOrLastNameIgnoreCase(keyword);
+    public List<Customer> findByFirstNameOrLastNameIgnoreCase(String firstName, String lastName) {
+        return customerRepository.findByFirstNameOrLastNameIgnoreCase(firstName, lastName);
     }
 
-    public List<Customer> findByAddressContainingIgnoreCase(String address) {
-        return customerRepository.findByAddressContainingIgnoreCase(address);
-    }
 
-    public List<Customer> findByActive(boolean active) {
-        return customerRepository.findByActive(active);
+    public List<Customer> findByAddressLine1ContainingIgnoreCase(String addressLine1) {
+        return customerRepository.findByAddressLine1ContainingIgnoreCase(addressLine1);
     }
 
     public Customer save(Customer customer) {
