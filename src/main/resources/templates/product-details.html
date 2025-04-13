@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Arcazon Product Details</title>
+<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css}" />
+</head>
+<body>
+
+	<div class="container mt-4">
+		<h1>Products</h1>
+		<ul>
+			<li th:each="product: ${products}">
+				<span th:text="${product.id}">1</span>
+				<span th:text="${product.name}">1</span>
+				<span th:text="${product.price}">1</span>
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>

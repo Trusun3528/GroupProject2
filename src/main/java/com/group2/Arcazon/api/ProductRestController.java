@@ -47,7 +47,6 @@ public class ProductRestController {
 		return productService.findByPriceBetween(minPrice, maxPrice);
 	}
 	
-	
 	/**
 	 * Adds a product while only requiring a categoryId instead of object. 
 	 * Still needs all product properties
