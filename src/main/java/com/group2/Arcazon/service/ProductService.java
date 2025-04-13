@@ -31,4 +31,16 @@ public class ProductService {
     public List<Product> findByCategory_Id(Long categoryId) {
         return productRepository.findByCategory_Id(categoryId);
     }
+    //distinguishes between new and existing products
+    public Product addNewProduct(Product product) {
+        if (product.getId() != null && productRepository.existsById(product.getId())) {
+            throw new RuntimeException("Product already exists with ID: " + product.getId());
+        }
+        return productRepository.save(product);
+    }
+    public Product updateStock(Long productId, int newStock) {
+        Product product = getProductById(productId);
+        product.setStock(newStock);
+        return productRepository.save(product);
+    }
 }
