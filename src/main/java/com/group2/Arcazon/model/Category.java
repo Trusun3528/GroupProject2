@@ -1,6 +1,9 @@
 package com.group2.Arcazon.model;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +19,7 @@ public class Category {
     private String description;
     
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonManagedReference				//Required to avoid infinite JSON returns
     private List<Product> products;
     
     // Getters and setters

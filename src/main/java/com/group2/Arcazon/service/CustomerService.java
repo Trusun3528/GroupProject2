@@ -12,6 +12,7 @@ import com.group2.Arcazon.repository.CustomerRepository;
 public class CustomerService {
     @Autowired
     private final CustomerRepository customerRepository;
+    
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }

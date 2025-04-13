@@ -3,6 +3,8 @@ package com.group2.Arcazon.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -13,6 +15,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonBackReference				// Required to avoid infinite JSON returns
     private Category category;
 
     @Column(nullable = false, length = 120)
