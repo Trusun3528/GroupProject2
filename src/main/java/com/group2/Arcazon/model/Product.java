@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "products")
 public class Product {
-
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +30,40 @@ public class Product {
     @Column(columnDefinition = "INT DEFAULT 0")
     private int stock;
 
-    // Getters and Setters
+    public Product() {}
+    
+        
+    /**
+     * Constructs product with minimal data.
+     * @param category
+     * @param name
+     * @param price
+     */
+    public Product(Category category, String name, BigDecimal price) {
+		super();
+		this.category = category;
+		this.name = name;
+		this.price = price;
+	}
+
+	/**
+     * Constructs product with all possible data
+     * @param category
+     * @param name
+     * @param description
+     * @param price
+     * @param stock
+     */
+    public Product(Category category, String name, String description, BigDecimal price, int stock) {
+		super();
+		this.category = category;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.stock = stock;
+	}
+
+	// Getters and Setters
     public Long getId() {
         return id;
     }

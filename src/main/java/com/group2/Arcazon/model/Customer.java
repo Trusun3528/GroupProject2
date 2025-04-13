@@ -38,14 +38,56 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders;
 
-    // Getters and Setters
+    
+    public Customer() {}
+    
+    /**
+     * Constructs customer with minimum data.
+     * @param firstName
+     * @param lastName
+     * @param email
+     */
+    public Customer(String firstName, String lastName, String email) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+
+	/**
+     * Constructs customer with all data.
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param phone
+     * @param addressLine1
+     * @param city
+     * @param province
+     * @param postalCode
+     */
+    public Customer(String firstName, String lastName, String email, String phone, String addressLine1, String city,
+			String province, String postalCode) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.addressLine1 = addressLine1;
+		this.city = city;
+		this.province = province;
+		this.postalCode = postalCode;
+	}
+
+	// Getters and Setters
     public Long getId() {
         return id;
     }
-
+    
+    /*
     public void setId(Long id) {
         this.id = id;
     }
+    */
 
     public String getFirstName() {
         return firstName;

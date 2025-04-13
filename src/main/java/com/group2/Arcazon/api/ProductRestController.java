@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,7 +39,6 @@ public class ProductRestController {
 	@GetMapping("/{id}")
 	public Product getProductById(@PathVariable Long id){
 		return productService.getProductById(id);
-		
 		 
 	}
 	
@@ -46,13 +47,16 @@ public class ProductRestController {
 		return productService.findByPriceBetween(minPrice, maxPrice);
 	}
 	
-	// Get /product/{id} - get an individual product
-	/*
-	@GetMapping("/{id}")
-	public String getProductById(@PathVariable Long id, Model model) {
-		Product product = productService.findById(id);
-		model.addAttribute("products", product);
-		return "product-details"; // maps to a product-details.html page
+	
+	/**
+	 * Adds a product while only requiring a categoryId instead of object. 
+	 * Still needs all product properties
+	 * @param productDTO
+	 * @return
+	 */
+	@PostMapping("/{add}")
+	public Product addProduct(@RequestBody ProductDTO productDTO) {
+		return productService.addNewProductUsingDTO(productDTO);
 	}
-	*/
+	
 }
