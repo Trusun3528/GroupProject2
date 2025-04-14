@@ -33,6 +33,15 @@ public class ProductService {
 	public Product saveProduct(Product product) {
 	    return productRepository.save(product);
 	}
+	
+	public void deleteProductById(Long id) {
+		if(!productRepository.existsById(id)) {
+			throw new RuntimeException("Product: " + id + " does not exist.");
+		}
+		
+		productRepository.deleteById(id);
+	}
+	
 	public List<Product> findByPriceBetween(java.math.BigDecimal minPrice, java.math.BigDecimal maxPrice) {
 	    return productRepository.findByPriceBetween(minPrice, maxPrice);
 	}

@@ -43,10 +43,22 @@ public class ProductController {
 		return "product-details";
 	}
 	
+	@GetMapping("/add")
+	public String getAddProduct(Model model) {
+		// make product obj and add attribute
+		model.addAttribute("product", new Product());
+		
+		// Get all ye categories to put in them chest fer ye scallywags
+		List<Category> categories = categoryService.getAllCategories();
+		model.addAttribute("categories", categories);
+		return "add-product";
+	}
+	
 	// Create a product
 	@PostMapping("/add")
-	public Product addProduct(Product product) {
-		return productService.addNewProduct(product);
+	public String addProduct(Product product) {
+		productService.addNewProduct(product);
+		return "redirect:/products";
 	}
 	
 	// Get to edit page
@@ -62,7 +74,6 @@ public class ProductController {
 		return "edit-product";
 	}
 	
-	
 	// PUT /products/{id} - update an existing product
 	@PostMapping("/edit")
 	public String editProduct(Product product) {
@@ -70,6 +81,11 @@ public class ProductController {
 		return "redirect:/products";
 	}
 	
-	// DELETE /product/{id} - delete an existing product
 	
+	// DELETE /product/{id} - delete an existing product
+	@GetMapping("/delete/{id}")
+	public String deleteProduct(@PathVariable Long id) {
+		productService.deleteProductById(id);
+		return "redirect:/products";
+	}
 }
