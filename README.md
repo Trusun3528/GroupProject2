@@ -48,3 +48,13 @@ Get: http://localhost:8080/api/categories
 
 ### Get Categories by id
 Get: http://localhost:8080/api/categories/{id}
+
+### Search Customers by Email Domain
+Find customers whose email contains the specified domain <br/>
+Get: http://localhost:8080/api/customers/search/email/{domain}
+
+### Checkout Process
+Proceed to Checkout from index.html <br/>
+Add any number of items to the cart (increase their quantity above 0) <br/>
+Scroll to the bottom of the page to find the Place Order button <br/>
+View your order confirmation <br/>

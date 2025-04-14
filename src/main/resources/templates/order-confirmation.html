@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Order Confirmation</h1>
+        <div class="card">
+            <div class="card-body">
+                <p><strong>Order ID:</strong> <span th:text="${order.id}">123</span></p>
+                <p><strong>Total Amount:</strong> $<span th:text="${order.totalAmount}">0.00</span></p>
+                <p><strong>Customer ID:</strong> <span th:text="${order.customer.id}">0</span></p>
+
+                <h2 class="mt-4">Items:</h2>
+                <ul class="list-group">
+                    <li th:each="item : ${order.orderItems}" class="list-group-item">
+                        <span th:text="${item.product.name}">Product Name</span> - 
+                        Quantity: <span th:text="${item.quantity}">1</span> - 
+                        Unit Price: $<span th:text="${item.unitPrice}">0.00</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

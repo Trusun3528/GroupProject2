@@ -16,6 +16,10 @@ public class CustomerService {
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
+    public Customer getCustomerById(Long id) {
+        return customerRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Customer not found"));
+    }
     public List<Customer> findByEmailContaining(String domain) {
         return customerRepository.findByEmailContaining(domain);
     }
