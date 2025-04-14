@@ -35,4 +35,12 @@ public class CategoryService {
     public List<Category> searchCategoriesByName(String name) {
         return categoryRepository.findByNameContainingIgnoreCase(name);
     }
+    
+	public void deleteCategoryById(Long id) {
+		if(!categoryRepository.existsById(id)) {
+			throw new RuntimeException("Category: " + id + " does not exist.");
+		}
+		
+		categoryRepository.deleteById(id);
+	}
 }
