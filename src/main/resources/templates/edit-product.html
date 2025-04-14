@@ -1,56 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Arcazon Edit Product</title>
-	<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css}" rel="stylesheet"/>
+<meta charset="UTF-8">
+<title>Arcazon Edit Product</title>
+<link
+	th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css}"
+	rel="stylesheet" />
 </head>
 <body>
 
-
-
 	<div class="container mt-4">
-		<h1>Product Details: ID:<span th:text="${product.id}">1</span> </h1>
-	
-		<form th:action="@{/products/edit}" method="post" th:object="${product}">
-			<input type="hidden" th:field="*{id}" />
-			
-			<div>
-				<label for="name">Product Name:</label><br>
-				<input type="text" id="name" name="name" th:value="${product.name}"><br/>
-			</div>
-			
-			<div>
-				<label for="price">Price:</label><br>
-				<input type="text" id="price" name="price" th:value="${product.price}"><br/>
-			</div>
 
-			<div>
-				<label for="description">Description:</label><br>
-				<input type="text" id="description" name="description" th:value="${product.description}"><br/>
+		<div class="row justify-content-center">		
+		
+			<div class="col-lg-6">
+			
+				<div class="mb-3 p-4 text-white bg-dark text-center rounded shadow col-lg-12">
+					<h1 class="h3 text-center">
+						Edit Product - ID:<span th:text="${product.id}">1</span>
+					</h1>
+				</div>
+			
+				<form class="text-white bg-dark p-4 rounded shadow" 
+				th:action="@{/products/edit}" method="post"
+				th:object="${product}">
+					<input type="hidden" th:field="*{id}" />
+		
+					<div class="mb-3 col-lg-6">
+						<label class="form-label" for="name">Product Name:</label> <input
+							type="text" class="form-control bg-dark text-white border-secondary" 
+							id="name" th:field="*{name}" />
+					</div>
+		
+					<div class="row">
+						<div class="mb-3 col-lg-6">
+							<label class="form-label" for="price">Price:</label> 
+							<input
+							type="text" class="form-control bg-dark text-white border-secondary" 
+							id="price" th:field="*{price}" />
+						</div>
+						
+						<div class="mb-3 col-lg-6">
+							<label class="form-label" for="stock">Stock:</label> 
+							<input
+								type="text" class="form-control bg-dark text-white border-secondary" 
+								id="stock" th:field="*{stock}" />
+						</div>
+					</div>
+
+
+					<div class="mb-3 col-12">
+						<label class="form-label" for="description">Description:</label> 
+						<input type="text" class="form-control bg-dark text-white border-secondary" 
+							id="description" th:field="*{description}" />
+					</div>
+
+
+		
+					<div class="mb-3 col-lg-6">
+						<label class="form-label" for="category">Category:</label> 
+						<select	class="form-select bg-dark text-white border-secondary" 
+							id="category" th:field="*{category.id}">
+							<option 
+								th:each="cat : ${categories}" 
+								th:value="${cat.id}"
+								th:text="${cat.name}">
+							</option>
+						</select>
+					</div>
+		
+		
+					<div class="row mt-3 gap-2">
+						<button type="submit" class="btn btn-primary col-auto ms-2">Save</button> 
+						<a class="btn btn-secondary col-auto" th:href="@{/products/{id}(id=${product.id})}">Back</a>
+					</div>
+				
+				</form>
+			
 			</div>
 			
-			<div>
-				<label for="stock">Stock:</label><br>
-				<input type="text" id="stock" name="stock" th:value="${product.stock}"><br/>
-			</div>
-			
-			<div>
-				<label for="category">Category:</label><br>
-				<select id="category" th:field="*{category.id}" class="form-select">
-					<option th:each="cat : ${categories}"
-							th:value="${cat.id}"
-							th:text="${cat.name}"
-							th:selected="${cat.id} == ${product.category.id}">
-					</option>
-				</select>
-			</div>
-			
-			
-			<button type="submit" class="btn btn-warning mt-3">Save Changes</button>
-		</form>
-	
-		<a class="btn btn-secondary mt-3" th:href="@{/products}">Back to Products</a>
+		</div>
+		
+
+		
 	</div>
 </body>
 </html>
