@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.group2.Arcazon.api.ProductDTO;
+import com.group2.Arcazon.model.Category;
 import com.group2.Arcazon.model.Product;
+import com.group2.Arcazon.service.CategoryService;
 import com.group2.Arcazon.service.ProductService;
 
 @Controller
@@ -18,9 +20,11 @@ import com.group2.Arcazon.service.ProductService;
 public class ProductController {
 
 	private final ProductService productService;
+	private final CategoryService categoryService;
 	
-	public ProductController(ProductService productService) {
+	public ProductController(ProductService productService, CategoryService categoryService) {
 		this.productService = productService;
+		this.categoryService = categoryService;
 	}
 	
 	// Gets all products in db using "/products"
@@ -46,19 +50,24 @@ public class ProductController {
 	}
 	
 	// Get to edit page
-	/*
 	@GetMapping("/edit/{id}")
 	public String getEditProduct(@PathVariable Long id, Model model) {
 		Product product = productService.getProductById(id);
 		model.addAttribute("product", product);
+		
+		// Get all ye categories to put in them chest fer ye scallywags
+		List<Category> categories = categoryService.getAllCategories();
+		model.addAttribute("categories", categories);
+		
 		return "edit-product";
 	}
-	*/
+	
 	
 	// PUT /products/{id} - update an existing product
 	@PostMapping("/edit")
-	public Product editProduct(Product product) {
-		return productService.saveProduct(product);
+	public String editProduct(Product product) {
+		productService.saveProduct(product);
+		return "redirect:/products";
 	}
 	
 	// DELETE /product/{id} - delete an existing product

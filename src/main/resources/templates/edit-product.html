@@ -10,28 +10,42 @@
 
 
 	<div class="container mt-4">
-		<h1>Product Details</h1>
+		<h1>Product Details: ID:<span th:text="${product.id}">1</span> </h1>
 	
-		<ul>
-			<li><strong>ID:</strong> <span th:text="${product.id}">1</span></li>
-			<li><strong>Name:</strong> <span th:text="${product.name}">Product Name</span></li>
-			<li><strong>Price:</strong> <span th:text="${product.price}">19.99</span></li>
-			<li><strong>Description:</strong> <span th:text="${product.description}">No description</span></li>
-			<li><strong>Stock:</strong> <span th:text="${product.stock}">0</span></li>
-			<li><strong>Category:</strong> <span th:text="${product.category.name}">Category</span></li>
-		</ul>
-		
 		<form th:action="@{/products/edit}" method="post" th:object="${product}">
 			<input type="hidden" th:field="*{id}" />
 			
-			<label for="productName">Product Name:</label><br>
-			<input type="text" id="productName" name="productName" th:text="${product.name}"><br/>
-			<label for="price">Price:</label><br>
-			<input type="text" id="price" name="price" th:text="${product.price}"><br/>
-			<label for="description">Description:</label><br>
-			<input type="text" id="description" name="description" th:text="${product.description}"><br/>
-			<label for="stock">Stock:</label><br>
-			<input type="text" id="stock" name="stock" th:text="${product.stock}"><br/>
+			<div>
+				<label for="name">Product Name:</label><br>
+				<input type="text" id="name" name="name" th:value="${product.name}"><br/>
+			</div>
+			
+			<div>
+				<label for="price">Price:</label><br>
+				<input type="text" id="price" name="price" th:value="${product.price}"><br/>
+			</div>
+
+			<div>
+				<label for="description">Description:</label><br>
+				<input type="text" id="description" name="description" th:value="${product.description}"><br/>
+			</div>
+			
+			<div>
+				<label for="stock">Stock:</label><br>
+				<input type="text" id="stock" name="stock" th:value="${product.stock}"><br/>
+			</div>
+			
+			<div>
+				<label for="category">Category:</label><br>
+				<select id="category" th:field="*{category.id}" class="form-select">
+					<option th:each="cat : ${categories}"
+							th:value="${cat.id}"
+							th:text="${cat.name}"
+							th:selected="${cat.id} == ${product.category.id}">
+					</option>
+				</select>
+			</div>
+			
 			
 			<button type="submit" class="btn btn-warning mt-3">Save Changes</button>
 		</form>
