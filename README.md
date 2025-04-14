@@ -16,6 +16,7 @@
 - If happy with default application settings then run spring server using command `mvnw.cmd spring-boot:run`
 - If using one of the other existing application files then run `mvnw.cmd spring-boot:run -Dspring-boot.run.profiles={keyword}`
 - Example of command is: `mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=local`
+- Check local host url: `http://localhost:8080`
 
 ## APIs
 
