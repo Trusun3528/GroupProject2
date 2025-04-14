@@ -58,4 +58,9 @@ public class ProductRestController {
 		return productService.addNewProductUsingDTO(productDTO);
 	}
 	
+	@GetMapping("/category/{categoryId}")
+	public List<Product> getProductsByCategory(@PathVariable Long categoryId) {
+	    return productService.findByCategory_Id(categoryId);
+	}
+	
 }

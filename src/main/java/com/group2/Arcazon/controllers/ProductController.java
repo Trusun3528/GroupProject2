@@ -88,4 +88,13 @@ public class ProductController {
 		productService.deleteProductById(id);
 		return "redirect:/products";
 	}
+	@GetMapping("/by-category/{categoryId}")
+	public String getProductsByCategory(@PathVariable Long categoryId, Model model) {
+	    List<Product> products = productService.findByCategory_Id(categoryId);
+	    Category category = categoryService.getCategoryById(categoryId)
+	            .orElseThrow(() -> new RuntimeException("Category not found"));
+	    model.addAttribute("products", products);
+	    model.addAttribute("categoryName", category.getName());
+	    return "products-by-category";
+	}
 }

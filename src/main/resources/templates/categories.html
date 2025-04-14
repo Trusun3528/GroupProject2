@@ -34,7 +34,7 @@
 					<tbody th:each="category: ${categories}">
 						<tr class="row">
 							<td class="col-2" th:text="${category.id}">1</td>
-							<td class="col-3" th:text="${category.name}">Category Name</td>
+							<td class="col-3"><a th:href="@{/products/by-category/{id}(id=${category.id})}" th:text="${category.name}">Category Name</a></td>
 							<td class="col-4" th:text="${category.description}">Here's a description</td>
 							<td class="col-3">
 								<a class="btn btn-warning" th:href="@{/categories/edit/{id} (id=${category.id})}">Edit</a>
